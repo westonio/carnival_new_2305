@@ -42,5 +42,6 @@ RSpec.describe Visitor do
     @visitor1.charge(3)
     
     expect(@visitor1.spending_money).to eq(7)
+    expect(@visitor1.money_spent).to eq(3)
   end
 end
