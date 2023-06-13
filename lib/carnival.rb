@@ -2,14 +2,12 @@ class Carnival
   @@total_revenues = 0
 
   attr_reader :duration,
-              :rides,
-              :revenue
+              :rides
 
   def initialize(start_date, end_date)
     @duration = (start_date - end_date)
     @rides = []
-    @revenue = 0
-    @@total_revenues += @revenue # create class variable to count all revenues
+    @@total_revenues  # create class variable to count all revenues
   end
 
   def add_ride(ride)
