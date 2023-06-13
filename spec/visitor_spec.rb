@@ -1,4 +1,4 @@
-require './spec/spec_helper'
+require './spec_helper'
 
 RSpec.describe Visitor do
   before(:each) do
@@ -36,5 +36,11 @@ RSpec.describe Visitor do
     expect(@visitor2.tall_enough?(54)).to eq(false)
     expect(@visitor3.tall_enough?(54)).to eq(true)
     expect(@visitor1.tall_enough?(64)).to eq(false)
+  end
+
+  it 'can be charged fees' do
+    @visitor1.charge(3)
+    
+    expect(@visitor1.spending_money).to eq(7)
   end
 end
