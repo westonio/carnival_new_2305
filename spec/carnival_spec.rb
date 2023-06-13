@@ -78,4 +78,27 @@ RSpec.describe Carnival do
 
     expect(@carnival.total_revenue).to eq(13)
   end
+
+  it 'has a summary' do
+    @carnival.add_ride(@ride1)
+    @carnival.add_ride(@ride2)
+    @visitor1 = Visitor.new('Bruce', 54, '$10')
+    @visitor2 = Visitor.new('Tucker', 36, '$5')
+    @visitor1.add_preference(:gentle)
+    @visitor2.add_preference(:gentle)
+    @ride2.board_rider(@visitor1)
+    @ride2.board_rider(@visitor2)
+    3.times do
+      @ride1.board_rider(@visitor1)
+    end
+    
+    expected = {
+      :visitor_count=>2,
+      :revenue_earned=>13,
+      :visitors=>[@visitor1, @visitor2],
+      :rides=>
+       [@ride1, @ride2]
+      }
+    expect(@carnival.summary).to eq(expected)
+  end
 end
