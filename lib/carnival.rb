@@ -1,10 +1,15 @@
 class Carnival
-  attr_reader :duration,
-              :rides
+  @@total_revenues = 0
 
-  def initialize(duration)
-    @duration = duration
+  attr_reader :duration,
+              :rides,
+              :revenue
+
+  def initialize(start_date, end_date)
+    @duration = (start_date - end_date)
     @rides = []
+    @revenue = 0
+    @@total_revenues += @revenue # create class variable to count all revenues
   end
 
   def add_ride(ride)
@@ -20,7 +25,9 @@ class Carnival
   end
 
   def total_revenue
-    rides.sum { |ride| ride.total_revenue}
+    totals = rides.sum { |ride| ride.total_revenue}
+    @@total_revenues += totals
+    totals
   end
 
   def summary
@@ -69,5 +76,9 @@ class Carnival
         total_revenue: ride.total_revenue
       }
     end
+  end
+
+  def self.total_revenues
+    @@total_revenues
   end
 end
